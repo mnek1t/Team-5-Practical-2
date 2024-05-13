@@ -5,14 +5,14 @@ from sklearn import metrics
 from sklearn.preprocessing import StandardScaler
 import matplotlib.pyplot as plt
 
+# Chargement du dataset Excel
+my_working_dataset = pd.read_excel('Dry_Bean_Dataset.xlsx', sheet_name='Dry_Beans_Dataset')
 
-# ADD DATASET HERE For example: my_working_dataset = pd.read_csv('path_to_our_dataset.csv')
-
-# Selecting the attributes for clustering
-features = ['MajorAxisLength', 'MinorAxisLength', 'AspectRatio']
+# Continuation of the code without modification for clustering
+features = ['MajorAxisLength', 'MinorAxisLength', 'AspectRation']
 clustering_dataset = my_working_dataset[features]
 
-# Normalize the features to give them equal importance
+# Normalize the features
 scaler = StandardScaler()
 clustering_dataset_scaled = scaler.fit_transform(clustering_dataset)
 
@@ -44,37 +44,38 @@ plt.show()
 
 
 # Hierarchical Clustering algorithm !!!!!!!!!!
+
 import pandas as pd
 from sklearn.preprocessing import StandardScaler
 from sklearn.cluster import AgglomerativeClustering
 import matplotlib.pyplot as plt
 import scipy.cluster.hierarchy as shc
 
+# Chargement du dataset Excel
+my_working_dataset = pd.read_excel('Dry_Bean_Dataset.xlsx', sheet_name='Dry_Beans_Dataset')
 
-# ADD DATASET HERE Example: my_working_dataset = pd.read_csv('path_to_your_dataset.csv')
-
-# Selecting a subset of features for the clustering task
-features = ['MajorAxisLength', 'MinorAxisLength', 'AspectRatio']
+# Selecting features for clustering
+features = ['MajorAxisLength', 'MinorAxisLength', 'AspectRation']  
 clustering_dataset = my_working_dataset[features]
 
-# Normalize the features to give them equal importance
+# Characteristic normalization
 scaler = StandardScaler()
 clustering_dataset_scaled = scaler.fit_transform(clustering_dataset)
 
-# Creating an Agglomerative Clustering model
+# Clustering model
 clustering = AgglomerativeClustering().fit(clustering_dataset_scaled)
 
-# Plotting the dendrogram to visualize the clustering
+# Displaying the dendrogram to visualize clustering
 plt.figure(figsize=(14, 8))
 plt.title('Dendrogram')
-Dendrogram = shc.dendrogram(shc.linkage(clustering_dataset_scaled, method='ward'))
+shc.dendrogram(shc.linkage(clustering_dataset_scaled, method='ward'))
 plt.xlabel('Samples')
 plt.ylabel('Distance')
 plt.show()
 
-# Experiment with different cut-off lines to form clusters
-thresholds = [5, 10, 15]  # Define different thresholds for experiments
-colors = ['viridis', 'plasma', 'inferno']  # Color maps for visualization
+# Experimenting with different cutoff lines to form clusters
+thresholds = [5, 10, 15]  # Setting different thresholds for experiments
+colors = ['viridis', 'plasma', 'inferno']  # Color cards for visualization
 for i, t in enumerate(thresholds):
     plt.figure(figsize=(6, 4))
     clusters = shc.fcluster(shc.linkage(clustering_dataset_scaled, method='ward'), t, criterion='distance')
@@ -84,3 +85,5 @@ for i, t in enumerate(thresholds):
     plt.ylabel('Minor Axis Length')
     plt.colorbar(label='Cluster Label')
     plt.show()
+
+
